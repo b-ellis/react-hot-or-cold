@@ -1,9 +1,8 @@
-import redux from 'redux';
-
-const creatStore = redux.creatStore;
+// var redux = require('redux');
+import { createStore } from 'redux'
 
 import reducers from './reducers/index';
 
-const store = creatStore(reducers.guessingReducer);
+const store = createStore(reducers.guessingReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 module.exports = store;

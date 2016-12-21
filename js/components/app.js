@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import actions from '../actions/index';
+import store from '../store';
 import Game from './game';
-import About from './about'
+import About from './about';
 
 class App extends React.Component {
 	constructor() {
@@ -11,6 +14,11 @@ class App extends React.Component {
 		}
 		this.showInfo = this.showInfo.bind(this);
 		this.closeInfo = this.closeInfo.bind(this);
+		this.reset = this.reset.bind(this);
+	}
+
+	reset(){
+		this.props.dispatch(actions.newGame());
 	}
 
 	showInfo(){
@@ -37,8 +45,8 @@ class App extends React.Component {
 
 						<nav> 
 							<ul className="clearfix">
-								<li onClick={this.showInfo.bind(this)}><a className="what" href="#">What ?</a></li>
-								<li><a className="new" href="#">+ New Game</a></li>
+								<li onClick={this.showInfo}><a className="what" href="#">What ?</a></li>
+								<li onClick={this.reset}><a className="new" href="#">+ New Game</a></li>
 							</ul>
 						</nav>
 
@@ -53,4 +61,6 @@ class App extends React.Component {
 	}
 };
 
-module.exports = App;
+const Container = connect()(App)
+
+module.exports = Container;

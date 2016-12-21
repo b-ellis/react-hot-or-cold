@@ -1,46 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import store from '../store';
+import actions from '../actions/index';
+
+import Feedback from './feedback';
+import Form from './form';
+import GuessList from './guesslist';
+import Counter from './counter';
+
 
 class Game extends React.Component {
+	constructor(){
+		super();
+		this.addUserGuess = this.addUserGuess.bind(this);
+	}
+	addUserGuess(guess){
+		this.props.dispatch(actions.addUserGuess(guess));
+	}
 	render(){
+		// console.log(this.props.state);
+		// const counter = () => {
+		// 	if(this.)
+		// }
 		return(
 			<section className='game'>
-				<Feedback />
-				<Form />
-				<Counter />
-				<GuessList />
+				<Feedback feedback={this.props.state.feedback} />
+				<Form onSubmit={this.addUserGuess}/>
+				<Counter numOfGuesses={this.props.state.guesses.length} />
+				<GuessList guesses={this.props.state.guesses} />
 			</section>
 		)
 	}
+}
+
+const mapStateToProps = (state, props) => {
+	return{
+		state
+	}
 } 
 
-const Feedback = (props) => {
-	return <h2 id="feedback">Make your Guess!</h2>
-}
+const Container = connect(mapStateToProps)(Game)
 
-class Form extends React.Component {
-	render(){
-		return(
-			<div>
-				<form>
-					<input type="text" name="userGuess" id="userGuess" className="text" maxLength="3" autoComplete="off" placeholder="Enter your Guess" required/>
-	      			<input type="submit" id="guessButton" className="button" name="submit" value="Guess"/>
-				</form>
-			</div>
-		)
-	}
-};
+module.exports = Container;
 
-const Counter = () => {
-	return <p>Guess #<span id="count">0</span>!</p>
-}
 
-const GuessList = () => {
-	const guesses = [];
-	return (
-		<ul id="guessList" className="guessBox clearfix">
-
-		</ul>
-	)
-}
-
-module.exports = Game;
