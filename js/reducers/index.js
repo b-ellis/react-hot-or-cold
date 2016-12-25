@@ -11,7 +11,6 @@ const State = {
 
 const guessingReducer = (state, action) => {
 	state = state || State;
-	form: formReducer
 	// console.log(state);
 
 	switch(action.type) {
@@ -21,22 +20,22 @@ const guessingReducer = (state, action) => {
 			guesses: state.guesses.concat([action.guess]),
 		});
 		//validation
-		validation(newState);
+		// validation(newState);
 		//Feedback
-		if(newState.guess == newState.target) {
+		if(newState.guess.userGuess == newState.target) {
 			newState.feedback = 'You Won!'
-		} else if(newState.guess <= newState.target + 10 && newState.guess >= newState.target - 10) {
+		} else if(newState.guess.userGuess <= newState.target + 10 && newState.guess.userGuess >= newState.target - 10) {
 				newState.feedback = "Hot";
 			} else {
-					if(newState.guess <= newState.target + 15 && newState.guess >= newState.target - 15) {
+					if(newState.guess.userGuess <= newState.target + 15 && newState.guess.userGuess >= newState.target - 15) {
 						newState.feedback = "Kinda Hot";
 					}
 					else {
-						if(newState.guess <= newState.target + 20 && newState.guess >= newState.target - 20) {
+						if(newState.guess.userGuess <= newState.target + 20 && newState.guess.userGuess >= newState.target - 20) {
 							newState.feedback = "Cold";
 						}
 						else {
-							if(newState.guess <= newState.target + 30 && newState.guess >= newState.target -30) {
+							if(newState.guess.userGuess <= newState.target + 30 && newState.guess.userGuess >= newState.target -30) {
 									newState.feedback = "Ice Cold";
 							}
 							else {
@@ -61,20 +60,9 @@ const guessingReducer = (state, action) => {
 	return state;
 }
 
-const validation = (state) => {
-		if(state.guess % 1 !== 0 || state.guess === ''){
-			state.feedback = 'Please input a number';
-			return;
-		}
-		if(state.guess < 0 ||state.guess > 100){
-			state.feedback = 'Please input a number between 1 and 100';
-			return;
-		}
-}
-
 const reducer = combineReducers({
+	guessing: guessingReducer,
 	form: formReducer
 });
 
-exports.reducer = reducer
-exports.guessingReducer = guessingReducer;
+exports.reducer = reducer;

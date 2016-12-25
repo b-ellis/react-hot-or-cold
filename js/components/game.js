@@ -13,21 +13,17 @@ import Counter from './counter';
 class Game extends React.Component {
 	constructor(){
 		super();
-		this.addUserGuess = this.addUserGuess.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	addUserGuess(guess){
+	handleSubmit(guess){
 		this.props.dispatch(actions.addUserGuess(guess));
 	}
 	render(){
-		// console.log(this.props.state);
-		// const counter = () => {
-		// 	if(this.)
-		// }
 		return(
 			<section className='game'>
-				<Feedback feedback={this.props.state.feedback} />
-				<Form onSubmit={this.addUserGuess}/>
-				<Counter numOfGuesses={this.props.state.guesses.length} />
+				<Feedback feedback={this.props.state.guessing.feedback} />
+				<Form onSubmit={this.handleSubmit} />
+				<Counter numOfGuesses={this.props.state.guessing.guesses.length} />
 				<GuessList guesses={this.props.state.guesses} />
 			</section>
 		)
