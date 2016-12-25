@@ -12,7 +12,7 @@ let Form = (props) => {
 	return(
 		<div>
 			<form onSubmit={handleSubmit}>
-				<Field name="userGuess" component={renderField} type="text" validate={[number, range]}/>
+				<Field name="userGuess" component={renderField} type="text" validate={[number, range, wholenumber]}/>
       			<input type="submit" id="guessButton" className="button" name="submit" value="Guess" onClick={handleSubmit} />
 			</form>
 		</div>
@@ -27,6 +27,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 const number = value => value && isNaN(Number(value)) ? "Please input a Number" : undefined;
+const wholenumber = value => value && (Number(value % 1 !== 0)) ? "Please input a Whole Number" : undefined;
 const range = value => value && (Number(value < 0 || value > 100)) ? "Please input a Number between 1 and 100" : undefined;
 
 Form = reduxForm({
