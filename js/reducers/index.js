@@ -53,7 +53,7 @@ const guessingReducer = (state, action) => {
 				target: newTarget,
 				guesses: [],
 				feedback: 'Make Your Guess',
-				fewestguess: action.fewest
+				fewestguess: actions.fewest
 			}
 		}
 		return constState();

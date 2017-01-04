@@ -71,7 +71,7 @@ const postFewest = (newFewest) => {
 			method: 'POST',
 			header: 'Content-Type: application/json',
 			body: JSON.stringify({
-				newFew: newFewest
+				fewest: newFewest
 			})
 		})
 		.then(() => {

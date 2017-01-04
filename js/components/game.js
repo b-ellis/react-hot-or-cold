@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { reset } from 'redux-form'
 
 import store from '../store';
 import actions from '../actions/index';
@@ -15,19 +16,23 @@ class Game extends React.Component {
 	constructor(){
 		super();
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.endOfGame = this.endOfGame.bind(this);
 	}
 	componentDidMount(){
 		this.props.dispatch(actions.fetchFewest());
 	}
 	handleSubmit(guess){
 		this.props.dispatch(actions.addUserGuess(guess));
+		console.log(this.props.state.guessing.feedback);
+		console.log(this.props.state.guessing.guesses.length + 1);
+		if(this.props.state.guessing.feedback === 'You Won!'){
+			this.props.dispatch(actions.postFewest(this.props.state.guessing.guesses.length + 1));
+		}
 	}
 	render(){
 		return(
 			<section className='game'>
 				<Feedback feedback={this.props.state.guessing.feedback} />
-				<Form onSubmit={this.handleSubmit} list={this.props.state.guessing.guesses} />
+				<Form onSubmit={this.handleSubmit} nj={this.props.state.guessing} />
 				<Counter numOfGuesses={this.props.state.guessing.guesses.length} />
 				<Fewest fewestGuess={this.props.state.guessing.fewestguess} />
 				<GuessList guesses={this.props.state.guesses} />
