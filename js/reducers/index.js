@@ -6,12 +6,12 @@ const State = {
 	target: actions.targetGenerator(),
 	guess: actions.guess,
 	guesses: [],
-	feedback: 'Make Your Guess'
+	feedback: 'Make Your Guess',
+	fewestguess: actions.fewest
 }
 
 const guessingReducer = (state, action) => {
 	state = state || State;
-	// console.log(state);
 
 	switch(action.type) {
 		case actions.USER_GUESS:
@@ -19,11 +19,11 @@ const guessingReducer = (state, action) => {
 			guess: action.guess,
 			guesses: state.guesses.concat([action.guess]),
 		});
-		//validation
-		// validation(newState);
 		//Feedback
 		if(newState.guess.userGuess == newState.target) {
-			newState.feedback = 'You Won!'
+			newState.feedback = 'You Won!';
+			newState.fewestguess = newState.guesses.length;
+			actions.postFewest(newState.fewestguess);
 		} else if(newState.guess.userGuess <= newState.target + 10 && newState.guess.userGuess >= newState.target - 10) {
 				newState.feedback = "Hot";
 			} else {
@@ -52,10 +52,17 @@ const guessingReducer = (state, action) => {
 			return {
 				target: newTarget,
 				guesses: [],
-				feedback: 'Make Your Guess'
+				feedback: 'Make Your Guess',
+				fewestguess: action.fewest
 			}
 		}
 		return constState();
+
+		case actions.FETCH_FEWEST_SUCCESS:
+		const fewState = Object.assign({}, state, {
+			fewestguess: action.fewest
+		});
+		return fewState;
 	}
 	return state;
 }

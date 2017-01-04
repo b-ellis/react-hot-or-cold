@@ -8,12 +8,17 @@ import Feedback from './feedback';
 import Form from './form';
 import GuessList from './guesslist';
 import Counter from './counter';
+import Fewest from './fewest';
 
 
 class Game extends React.Component {
 	constructor(){
 		super();
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.endOfGame = this.endOfGame.bind(this);
+	}
+	componentDidMount(){
+		this.props.dispatch(actions.fetchFewest());
 	}
 	handleSubmit(guess){
 		this.props.dispatch(actions.addUserGuess(guess));
@@ -22,8 +27,9 @@ class Game extends React.Component {
 		return(
 			<section className='game'>
 				<Feedback feedback={this.props.state.guessing.feedback} />
-				<Form onSubmit={this.handleSubmit} />
+				<Form onSubmit={this.handleSubmit} list={this.props.state.guessing.guesses} />
 				<Counter numOfGuesses={this.props.state.guessing.guesses.length} />
+				<Fewest fewestGuess={this.props.state.guessing.fewestguess} />
 				<GuessList guesses={this.props.state.guesses} />
 			</section>
 		)
