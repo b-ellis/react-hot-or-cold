@@ -1,6 +1,10 @@
 {
   "name": "thinkful-react-starter",
   "version": "0.0.1",
+  "engines": {
+    "node": "7.3.0",
+    "npm": "3.10.10"
+  },
   "description": "A React template",
   "main": "js/index.js",
   "scripts": {
