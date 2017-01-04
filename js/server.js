@@ -27,10 +27,6 @@ const createStorage = function(){
 
 const storage = createStorage();
 
-app.get('/', (req, res) {
-	return res.body;
-});
-
 app.get('/fewest', function(req, res) {
 	return res.json({fewest: storage.fewest});
 });
