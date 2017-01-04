@@ -20,6 +20,7 @@ const Storage = {
 }
 
 //DUmmy;
+//second
 
 const createStorage = function(){
 	const storage = Object.create(Storage);
