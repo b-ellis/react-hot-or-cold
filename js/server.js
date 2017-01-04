@@ -19,6 +19,8 @@ const Storage = {
 	}
 }
 
+//DUmmy;
+
 const createStorage = function(){
 	const storage = Object.create(Storage);
 	storage.fewest = 30;
