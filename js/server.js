@@ -19,8 +19,6 @@ const Storage = {
 	}
 }
 
-//DUmmy;
-
 const createStorage = function(){
 	const storage = Object.create(Storage);
 	storage.fewest = 30;
@@ -34,13 +32,14 @@ app.get('/fewest', function(req, res) {
 });
 
 app.post('/fewest', function(req, res) {
-	console.log(req);
-	const length = req.body.newFew
+	console.log(req.body);
+	const length = req.body.fewest;
 	if(length === '0'){
 		return res.sendStatus(400);
 	}
 
-	const newFewest = storage.update(req.body.newFew);
+	const newFewest = storage.update(req.body.fewest);
+	console.log(res.body);
 	return res.status(201).json(newFewest);
 });
 

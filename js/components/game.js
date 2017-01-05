@@ -21,12 +21,13 @@ class Game extends React.Component {
 		this.props.dispatch(actions.fetchFewest());
 	}
 	handleSubmit(guess){
-		this.props.dispatch(actions.addUserGuess(guess));
-		console.log(this.props.state.guessing.feedback);
-		console.log(this.props.state.guessing.guesses.length + 1);
 		if(this.props.state.guessing.feedback === 'You Won!'){
-			this.props.dispatch(actions.postFewest(this.props.state.guessing.guesses.length + 1));
+			this.props.dispatch(actions.addUserGuess(guess));
+			this.props.dispatch(actions.postFewest(this.props.state.guessing.guesses.length));
+		} else {
+			this.props.dispatch(actions.addUserGuess(guess));
 		}
+		// this.props.dispatch(actions.addUserGuess(guess));
 	}
 	render(){
 		return(

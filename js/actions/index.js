@@ -69,13 +69,15 @@ const postFewest = (newFewest) => {
 		const url = 'http://localhost:8080/fewest';
 		return fetch(url, {
 			method: 'POST',
-			header: 'Content-Type: application/json',
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			body: JSON.stringify({
 				fewest: newFewest
 			})
 		})
 		.then(() => {
-			return dispatch(fetchFewest());
+			return dispatch(fetchFewestSuccess(newFewest));
 		});
 	}
 }

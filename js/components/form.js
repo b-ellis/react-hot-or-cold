@@ -6,7 +6,7 @@ import store from '../store';
 import actions from '../actions/index';
 
 let Form = (props) => {
-	const { handleSubmit } = props;
+	let { handleSubmit } = props;
 
 	return(
 		<div>
