@@ -23,7 +23,6 @@ const guessingReducer = (state, action) => {
 		if(newState.guess.userGuess == newState.target) {
 			newState.feedback = 'You Won!';
 			newState.fewestguess = newState.guesses.length;
-			// actions.postFewest(newState.fewestguess);
 		} else if(newState.guess.userGuess <= newState.target + 10 && newState.guess.userGuess >= newState.target - 10) {
 				newState.feedback = "Hot";
 			} else {
@@ -35,7 +34,7 @@ const guessingReducer = (state, action) => {
 							newState.feedback = "Cold";
 						}
 						else {
-							if(newState.guess.userGuess <= newState.target + 30 && newState.guess.userGuess >= newState.target -30) {
+							if(newState.guess.userGuess <= newState.target + 30 && newState.guess.userGuess >= newState.target - 30) {
 									newState.feedback = "Ice Cold";
 							}
 							else {
@@ -51,7 +50,7 @@ const guessingReducer = (state, action) => {
 			target: actions.targetGenerator(),
 			guesses: [],
 			feedback: 'Make Your Guess',
-			fewestguess: actions.fewest
+			fewestguess: state.fewest
 		})
 		return constState;
 

@@ -16,7 +16,8 @@ const NEW_GAME = "NEW_GAME";
 const newGame = () => {
 	return {
 		type: NEW_GAME,
-		target: targetGenerator()
+		target: targetGenerator(),
+		fewest: fetchFewest()
 	} 
 }
 
