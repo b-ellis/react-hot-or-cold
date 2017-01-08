@@ -39,7 +39,7 @@ const fetechFewestError = (error) => {
 
 const fetchFewest = () => {
 	return (dispatch) => {
-		const url = 'http://localhost:8080/fewest';
+		const url = 'http://localhost:5000/fewest';
 		return fetch(url).then((res) => {
 			if(res.status < 200 || res.status >= 300) {
 				const error = new Error(res.statusText);
@@ -67,7 +67,7 @@ const fetchFewest = () => {
 
 const postFewest = (newFewest) => {
 	return (dispatch) => {
-		const url = 'http://localhost:8080/fewest';
+		const url = 'http://localhost:5000/fewest';
 		return fetch(url, {
 			method: 'POST',
 			headers: {
